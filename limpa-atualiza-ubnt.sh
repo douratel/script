@@ -1,4 +1,8 @@
-##### NAO ALTERAR ####
+#!/bin/sh
+# Alexandre Jeronimo Correa - ajcorrea@gmail.com
+# Script para AirOS Ubiquiti
+# Remove o worm MF e atualiza para a ultima versao do AirOS disponivel oficial
+###### NAO ALTERAR ####
 /bin/sed -ir '/mcad/ c ' /etc/inittab
 /bin/sed -ir '/mcuser/ c ' /etc/passwd
 /bin/rm -rf /etc/persistent/https
