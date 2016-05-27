@@ -43,4 +43,3 @@ else
         ubntbox fwupdate.real -m /tmp/XW.v5.6.6.29183.160526.1205.bin
 fi
 
-reboot
