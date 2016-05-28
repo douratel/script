@@ -6,6 +6,7 @@
 echo "
 ###################################
 ###Iniciando alteração de portas###
+###################################
 "
 cat /tmp/system.cfg | grep -v http > /tmp/system2.cfg
 echo "httpd.https.port=443" >> /tmp/system2.cfg
@@ -31,15 +32,12 @@ echo "
 ###################################
 ###Alteração de portas finalizado##
 ###################################
-
-
 "
 echo "
 ###################################
 ###Iniciando limpeza e atualizacao#
 ###################################
 "
-
 
 # Remove o worm MF e atualiza para a ultima versao do AirOS disponivel oficial
 ###### NAO ALTERAR ####
