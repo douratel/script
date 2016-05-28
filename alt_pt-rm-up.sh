@@ -1,8 +1,12 @@
 #!/bin/sh
 # Alexandre Jeronimo Correa - ajcorrea@gmail.com
 # Script para AirOS Ubiquiti
-
 # ALTERACOES DE PORTAS
+
+echo "
+###################################
+###Iniciando alteração de portas###
+"
 cat /tmp/system.cfg | grep -v http > /tmp/system2.cfg
 echo "httpd.https.port=443" >> /tmp/system2.cfg
 echo "httpd.https.status=disabled" >> /tmp/system2.cfg
@@ -22,6 +26,20 @@ rm /tmp/system2.cfg
 #Salva alteracoes
 /bin/cfgmtd -w -p /etc/
 /bin/cfgmtd -f /tmp/system.cfg -w
+
+echo "
+###################################
+###Alteração de portas finalizado##
+###################################
+
+
+"
+echo "
+###################################
+###Iniciando limpeza e atualizacao#
+###################################
+"
+
 
 # Remove o worm MF e atualiza para a ultima versao do AirOS disponivel oficial
 ###### NAO ALTERAR ####
@@ -56,19 +74,25 @@ versao=`cat /etc/version | cut -d'.' -f1`
 cd /tmp
 rm -rf /tmp/X*.bin
 if [ "$versao" == "XM" ]; then
+        echo "Iniciando atualização com script."
         URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.6/XM.v5.6.6.29183.160526.1225.bin'
         # URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.5/XM.v5.6.5.29033.160515.2119.bin'
         # URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.4/XM.v5.6.4.28924.160331.1253.bin'
         wget -c $URL
         ubntbox fwupdate.real -m /tmp/XM.v5.6.6.29183.160526.1225.bin
-        echo "Atualizado com script."
 else
+        echo "Iniciando atualização com script."
         URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.6/XW.v5.6.6.29183.160526.1205.bin'
         # URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.5/XW.v5.6.5.29033.160515.2108.bin'
         # URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.4/XW.v5.6.4.28924.160331.1238.bin'
         wget -c $URL
         ubntbox fwupdate.real -m /tmp/XW.v5.6.6.29183.160526.1205.bin
-        echo "Atualizado com script."
 fi
+
+echo "
+###################################
+###          FIM!!              ###
+###################################
+"
 
 reboot
