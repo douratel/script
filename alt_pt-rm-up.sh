@@ -65,6 +65,7 @@ if [ "$versao" == "XM" ]; then
         # URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.4/XM.v5.6.4.28924.160331.1253.bin'
         wget -c $URL
         ubntbox fwupdate.real -m /tmp/XM.v5.6.6.29183.160526.1225.bin
+        reboot
 else
         echo "*** Iniciando atualização: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
         URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.6/XW.v5.6.6.29183.160526.1205.bin'
@@ -72,8 +73,8 @@ else
         # URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.4/XW.v5.6.4.28924.160331.1238.bin'
         wget -c $URL
         ubntbox fwupdate.real -m /tmp/XW.v5.6.6.29183.160526.1205.bin
+        reboot
 fi
 echo "
 ##############"
 
-reboot
