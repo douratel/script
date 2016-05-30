@@ -4,11 +4,8 @@
 # Alterado por Leandro Pereira - leandro.ti@hotmail.com
 # ALTERACOES DE PORTAS
 
-echo "
-###################################
-###Iniciando alteração de portas###
-###################################
-"
+echo "#*# Iniciando check/up/change em: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
+
 cat /tmp/system.cfg | grep -v http > /tmp/system2.cfg
 echo "httpd.https.port=443" >> /tmp/system2.cfg
 echo "httpd.https.status=disabled" >> /tmp/system2.cfg
@@ -28,17 +25,6 @@ rm /tmp/system2.cfg
 #Salva alteracoes
 /bin/cfgmtd -w -p /etc/
 /bin/cfgmtd -f /tmp/system.cfg -w
-
-echo "
-###################################
-###Alteração de portas finalizado##
-###################################
-"
-echo "
-###################################
-###Iniciando limpeza e atualizacao#
-###################################
-"
 
 # Remove o worm MF e atualiza para a ultima versao do AirOS disponivel oficial
 ###### NAO ALTERAR ####
@@ -61,11 +47,11 @@ echo "
 
 fullver=`cat /etc/version`
 if [ "$fullver" == "XM.v5.6.6" ]; then
-        echo "Atualizado... Done"
+        echo "#*# Equipamento ja esta atualizado: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
         exit
 fi
 if [ "$fullver" == "XW.v5.6.6" ]; then
-        echo "Atualizado... Done"
+        echo "#*# Equipamento ja esta atualizado: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
         exit
 fi
 
@@ -88,10 +74,5 @@ else
         ubntbox fwupdate.real -m /tmp/XW.v5.6.6.29183.160526.1205.bin
 fi
 
-echo "
-###################################
-###          FIM!!              ###
-###################################
-"
 
 reboot
