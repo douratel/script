@@ -4,7 +4,7 @@
 # Alterado por Leandro Pereira - leandro.ti@hotmail.com
 # ALTERACOES DE PORTAS
 
-echo "#*# Iniciando check/up/change em: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
+#echo "#*# Iniciando check/up/change em: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
 
 cat /tmp/system.cfg | grep -v http > /tmp/system2.cfg
 echo "httpd.https.port=443" >> /tmp/system2.cfg
@@ -59,20 +59,21 @@ versao=`cat /etc/version | cut -d'.' -f1`
 cd /tmp
 rm -rf /tmp/X*.bin
 if [ "$versao" == "XM" ]; then
-        echo "*aviso* Iniciando atualização: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
+        echo "#*# Iniciando atualização: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
         URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.6/XM.v5.6.6.29183.160526.1225.bin'
         # URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.5/XM.v5.6.5.29033.160515.2119.bin'
         # URL='http://dl.ubnt.com/firmwares/XN-fw/v5.6.4/XM.v5.6.4.28924.160331.1253.bin'
         wget -c $URL
         ubntbox fwupdate.real -m /tmp/XM.v5.6.6.29183.160526.1225.bin
 else
-        echo "*aviso* Iniciando atualização: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
+        echo "#*# Iniciando atualização: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
         URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.6/XW.v5.6.6.29183.160526.1205.bin'
         # URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.5/XW.v5.6.5.29033.160515.2108.bin'
         # URL='http://dl.ubnt.com/firmwares/XW-fw/v5.6.4/XW.v5.6.4.28924.160331.1238.bin'
         wget -c $URL
         ubntbox fwupdate.real -m /tmp/XW.v5.6.6.29183.160526.1205.bin
 fi
-
+echo "
+##############"
 
 reboot
