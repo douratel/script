@@ -4,8 +4,6 @@
 # Alterado por Leandro Pereira - leandro.ti@hotmail.com
 # ALTERACOES DE PORTAS
 
-#echo "*** Iniciando check/up/change em: `ifconfig ppp0 | cat /tmp/system.cfg | grep ppp.1.name | cut -d= -f2`"
-
 cat /tmp/system.cfg | grep -v http > /tmp/system2.cfg
 echo "httpd.https.port=443" >> /tmp/system2.cfg
 echo "httpd.https.status=disabled" >> /tmp/system2.cfg
