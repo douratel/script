@@ -1,4 +1,3 @@
-#!/bin/sh
 # Alexandre Jeronimo Correa - ajcorrea@gmail.com
 # Script para AirOS Ubiquiti
 # Alterado por Leandro Pereira - leandro.ti@hotmail.com
