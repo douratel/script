@@ -1,24 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 
-# ALTERACOES DE PORTAS
-cat /tmp/system.cfg | grep -v http > /tmp/system2.cfg
-echo "httpd.https.port=443" >> /tmp/system2.cfg
-echo "httpd.https.status=disabled" >> /tmp/system2.cfg
-echo "httpd.port=54080" >> /tmp/system2.cfg
-echo "httpd.session.timeout=900" >> /tmp/system2.cfg
-echo "httpd.status=enabled" >> /tmp/system2.cfg
-cat /tmp/system2.cfg | uniq > /tmp/system.cfg
-rm /tmp/system2.cfg
+echo "Digite login dos equipamentos:"
+read login
+echo "Digite senha dos equipamentos:"
+read senha
+echo "Bloco de rede, exemplo 192.168.1"
+read rede
+echo "Primeiro ip da rede digitada acima, exemplo 0"
+read ip
+echo "Ultimo ip da rede, exemplo 255"
+read uip
+echo "Porta atual de acesso SSH, exemplo 22"
+read port
 
-cat /tmp/system.cfg | grep -v sshd > /tmp/system2.cfg
-echo "sshd.auth.passwd=enabled" >> /tmp/system2.cfg
-echo "sshd.port=54022" >> /tmp/system2.cfg
-echo "sshd.status=enabled" >> /tmp/system2.cfg
-cat /tmp/system2.cfg | uniq > /tmp/system.cfg
-rm /tmp/system2.cfg
 
-#Salva alteracoes
-/bin/cfgmtd -w -p /etc/
-/bin/cfgmtd -f /tmp/system.cfg -w
-
-reboot 
+uip=`expr $uip + 1`
+while [ "$ip" -lt "$uip" ]; do
+        sshpass -p $senha ssh -p$port -o UserKnownHostsFile=/dev/null -oConnectTimeout=10 -oStrictHostKeyChecking=no $login@$rede.$ip "trigger_url https://raw.githubusercontent.com/bgpconsultoria/scripts-ubnt/script/alteraportas.sh | sh"&
+        ip=`expr $ip + 1`
+done
