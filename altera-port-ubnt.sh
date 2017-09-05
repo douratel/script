@@ -16,6 +16,6 @@ read port
 
 uip=`expr $uip + 1`
 while [ "$ip" -lt "$uip" ]; do
-        sshpass -p $senha ssh -p$port -o UserKnownHostsFile=/dev/null -oConnectTimeout=10 -oStrictHostKeyChecking=no $login@$rede.$ip "trigger_url https://raw.githubusercontent.com/bgpconsultoria/scripts-ubnt/script/alteraportas.sh | sh"&
+        sshpass -p $senha ssh -p$port -o UserKnownHostsFile=/dev/null -oConnectTimeout=10 -oStrictHostKeyChecking=no $login@$rede.$ip "trigger_url https://raw.githubusercontent.com/douratel/script/master/script-alt-pt.sh | sh"&
         ip=`expr $ip + 1`
 done
